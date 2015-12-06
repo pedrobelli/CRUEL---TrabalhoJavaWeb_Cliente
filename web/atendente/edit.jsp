@@ -9,7 +9,7 @@
           <h4>Entrada</h4>
           <form class="cad-entry" action="index.html" method="post">
             <div class="input-field">
-              <input type="date" name="entry-date">
+              <input type="date" name="entry-date" class="datepicker">
             </div>
             <div class="input-field">
               <label for="entry-hour">Hora:</label>
