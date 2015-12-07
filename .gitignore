@@ -1,0 +1,7 @@
+# Ignore netbeans config
+nbproject/
+
+
+
+build/
+build.xml
