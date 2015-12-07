@@ -1,7 +1,11 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<%@ include file="/header.jsp"%>
+
 <main>
     <div class="container row">
 
-       <%@ include file="/gerente/actionbutton.jsp"%>
+       <%@ include file="actionbutton.jsp"%>
 
      <h3 class="center">CAIXA</h3>
       <section>
@@ -40,3 +44,5 @@
       </section>
     </div>
   </main>
+
+<%@ include file="/footer.jsp"%>
