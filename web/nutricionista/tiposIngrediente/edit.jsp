@@ -10,7 +10,7 @@
      <h3 class="center">NUTRIÇÃO</h3>
       <section>
           <div class="container">
-          <h4>Nova Categoria</h4>
+         <h4>Editar Tipo de Ingrediente</h4>
           
           <form class="cadast" action="index.html" method="post">
             <div class="input-field">
