@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 10/12/2015 01:37:31 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="hibernateMap.TipoIngrediente" table="tipos_ingrediente" catalog="cruel_cliente" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="nome" type="string">
+            <column name="nome" length="80" />
+        </property>
+        <set name="ingredienteses" table="ingredientes" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="tipo_ingrediente_id" />
+            </key>
+            <one-to-many class="hibernateMap.Ingredientes" />
+        </set>
+    </class>
+</hibernate-mapping>

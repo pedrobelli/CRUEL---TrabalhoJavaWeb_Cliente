@@ -25,6 +25,10 @@
                    <option value="3">Option 3</option>
                  </select>
             </div>
+            <div class="input-field">
+                <label for="descricao">Descricao</label>
+                <textarea name="descricao" class="materialize-textarea"></textarea>
+            </div>
             
             <button class="btn blue right" type="submit" name="action">Ok
                 <i class="material-icons right">send</i>

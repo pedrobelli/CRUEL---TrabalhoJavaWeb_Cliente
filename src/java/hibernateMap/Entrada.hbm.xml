@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 10/12/2015 01:37:31 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="hibernateMap.Entrada" table="entradas" catalog="cruel_cliente" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="data" type="timestamp">
+            <column name="data" length="19" not-null="true" />
+        </property>
+        <property name="tipoCliente" type="java.lang.Integer">
+            <column name="tipo_cliente" />
+        </property>
+        <property name="valorRefeicao" type="java.lang.Double">
+            <column name="valor_refeicao" precision="22" scale="0" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -10,20 +10,8 @@
       <section>
         <div class="container">
           <h4>Entrada</h4>
+          
           <form class="cad-entry" action="index.html" method="post">
-            <div class="input-field">
-              <input type="date" name="entry-date" class="datepicker">
-            </div>
-            <div class="input-field">
-              <label for="entry-hour">Hora:</label>
-              <input type="text" name="entry-hour">
-            </div>
-            
-             <div class="input-field">
-              <label for="entry-value">Valor:</label>
-              <input type="text" name="entry-value">
-            </div>
-            
             <div class="input-field">
               <select class="browser-default">
                 <option value="" disabled selected>Categoria</option>
@@ -32,9 +20,19 @@
                 <option value="3">Externo</option>
               </select>
             </div>
-                  
+            <div class="input-field">
+              <label for="entry-value">Valor:</label>
+              <input type="text" name="entry-value">
+            </div>
+            <div class="input-field">
+              <input type="date" name="entry-date" class="datepicker">
+            </div>
+            <div class="input-field">
+              <label for="entry-hour">Hora:</label>
+              <input type="text" name="entry-hour">
+            </div>      
 
-              <button class="btn blue right" type="submit" name="action">Ok
+             <button class="btn blue right" type="submit" name="action">Ok
                <i class="material-icons right">send</i>
              </button>
              

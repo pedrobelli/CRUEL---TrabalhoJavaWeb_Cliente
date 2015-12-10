@@ -1,0 +1,47 @@
+/*TABELA TIPOS INGREDIENTE */
+CREATE TABLE tipos_ingrediente(
+  id   INTEGER AUTO_INCREMENT NOT NULL,
+  nome VARCHAR(80),
+  
+  PRIMARY KEY (id)
+);
+
+/*TABELA INGREDIENTES */
+CREATE TABLE ingredientes(
+  id        INTEGER AUTO_INCREMENT NOT NULL,
+  nome      VARCHAR(80),
+  descricao	VARCHAR(140),
+  tipo_ingrediente_id INTEGER,
+  
+  PRIMARY KEY (id),
+  FOREIGN KEY (tipo_ingrediente_id) REFERENCES tipos_ingrediente(id)
+);
+
+/*TABELA CARDAPIOS */
+CREATE TABLE cardapios(
+  id   INTEGER AUTO_INCREMENT NOT NULL,
+  data DATE,
+  
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE cardapio_ingredientes(
+  tipo_refeicao INTEGER,
+  cardapio_id INTEGER,
+  ingrediente_id INTEGER,
+  
+  UNIQUE KEY (tipo_refeicao),
+  UNIQUE KEY (cardapio_id),
+  UNIQUE KEY (ingrediente_id)  
+);
+
+/*TABELA ENTRADAS */
+CREATE TABLE entradas(
+  id INTEGER AUTO_INCREMENT NOT NULL,
+  data TIMESTAMP,
+  tipo_cliente INTEGER,
+  valor_refeicao DOUBLE,
+  
+  PRIMARY KEY (id)
+);
+
