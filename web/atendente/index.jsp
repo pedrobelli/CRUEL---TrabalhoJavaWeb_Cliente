@@ -1,3 +1,5 @@
+<%@page import="services.TiposClienteClient"%>
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="entradas.Entrada"%>
 <%@page import="java.util.List"%>
@@ -24,6 +26,7 @@
             <ul class="main-list">
                 <%        
                     List<Entrada> entradas = (List) request.getAttribute("entradas");
+                    
                     if(entradas.size()>0){
                         int index;
                         for(index=0; index < entradas.size(); index++){                   

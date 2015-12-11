@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import services.TiposClienteClient;
 import utils.HibernateUtil;
     
 @WebServlet(name = "EntradasController", urlPatterns = {"/entradas"})
@@ -109,8 +110,13 @@ public class EntradasController extends HttpServlet {
                 getServletContext().getRequestDispatcher("/atendente/index.jsp").forward(request, response);
 
             } else if (action.equals("new")) {
+                
+                TiposClienteClient tiposCliente = new TiposClienteClient().getJson(TiposClienteClient.class);
+                
+                
+                request.setAttribute("tiposCliente", tiposCliente);                  
                 request.setAttribute("entrada", new Entrada());
-
+                
                 this.getTransaction().commit();
 
                 getServletContext().getRequestDispatcher("/atendente/new.jsp").forward(request, response);
@@ -158,6 +164,7 @@ public class EntradasController extends HttpServlet {
             }
 
         } catch(Exception E) {
+            E.printStackTrace();
             request.setAttribute("entrada", this.processRequestForError());
             //request.setAttribute("usuario", Usuario.processRequestForError(request));
 

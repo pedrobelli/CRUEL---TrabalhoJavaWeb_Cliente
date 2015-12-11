@@ -1,3 +1,5 @@
+<%@page import="services.TiposClienteClient"%>
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="entradas.Entrada"%>
 <!DOCTYPE html>
@@ -6,6 +8,7 @@
 
 <% 
     Entrada entrada = (Entrada) request.getAttribute("entrada"); 
+    ArrayList tipoCliente = (ArrayList) request.getAttribute("tiposCliente");
 %>
 
 <main class="main">
@@ -22,13 +25,24 @@
                 <form class="cadast" action="<%=url%>entradas?action=create" method="post">
                                           
                     <div class="input-field">
-                        <select class="browser-default" name="tipoCliente" value="">
-                                <option value="" disabled selected>Tipo de Cliente</option>
-                                <option value="1">Funcionario</option>
-                                <option value="2">Aluno</option>
-                                <option value="3">Externo</option>
+                        <select name="tipoIngrediente" class="browser-default" value="">
+                            <option value="" disabled selected>Tipo de Ingrediente</option>
+                            <%
+                                List<TiposClienteClient> tiposCliente = (List) request.getAttribute("tiposCliente");
+                                out.println("<h1>"+tiposCliente+"</h1>");
+                                if(tiposCliente.size()>0){
+                                    int index;                                    
+                                    for(index=0; index < tiposCliente.size(); index++){ 
+                                        TiposClienteClient tipoClente = tiposCliente.get(index);
+                                        
+                                        out.println("<option value='" + tipoCliente + "' selected>" + tipoCliente + "</option>");
+                                        
+                                    }
+                                }
+                                
+                                
+                            %>
                         </select>
-                        </div>
                      <div class="input-field">
                             <label for="valorRefeicao">Valor:</label>
                             <input type="text" name="valorRefeicao" value="${entrada.valorRefeicao}">
