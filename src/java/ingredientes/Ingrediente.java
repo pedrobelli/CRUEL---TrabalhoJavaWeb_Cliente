@@ -1,20 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ingredientes;
 
 import java.io.Serializable;
-/**
- *
- * @author Layla
- */
+
 public class Ingrediente implements Serializable {
-    private int id;
+    private int    id;
     private String nome;
     private String descricao;
-    private int tipoIngrediente;
+    private int    tipoIngrediente;
 
     public Ingrediente(int id, String nome, String descricao, int tipoIngrediente) {
         this.id = id;

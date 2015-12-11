@@ -2,7 +2,6 @@ package tiposIngrediente;
     
 import java.io.IOException;
 import java.io.PrintWriter;
-import static java.lang.Double.parseDouble;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,17 +12,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-//import usuarios.DaoUsuario;;
-//import usuarios.Usuario;
 import utils.HibernateUtil;
-import utils.TipoUsuarioEnum.TipoUsuario;
     
 @WebServlet(name = "TiposIngredienteController", urlPatterns = {"/tiposIngrediente"})
 public class TiposIngredienteController extends HttpServlet {
-
     private HttpServletRequest request;
     private HttpServletResponse response;
     private Session session;
@@ -91,8 +85,10 @@ public class TiposIngredienteController extends HttpServlet {
             String action = request.getParameter("action");
                 
             if (action == null) {
-
                 request.setAttribute("tiposIngrediente", this.all()); 
+
+                this.getTransaction().commit();
+                
                 getServletContext().getRequestDispatcher("/nutricionista/tiposIngrediente/index.jsp").forward(request, response);
 
             } else if (action.equals("search")) {
@@ -104,11 +100,16 @@ public class TiposIngredienteController extends HttpServlet {
                     request.setAttribute("tiposIngrediente", this.all());
                 }
 
+                this.getTransaction().commit();
+
                 getServletContext().getRequestDispatcher("/nutricionista/tiposIngrediente/index.jsp").forward(request, response);
 
             } else if (action.equals("new")) {
 
                 request.setAttribute("tipoIngrediente", new TipoIngrediente());
+
+                this.getTransaction().commit();
+                
                 getServletContext().getRequestDispatcher("/nutricionista/tiposIngrediente/new.jsp").forward(request, response);
 
             } else if (action.equals("create")) {                    
@@ -128,20 +129,22 @@ public class TiposIngredienteController extends HttpServlet {
                 int id = Integer.parseInt(request.getParameter("id"));
 
                 request.setAttribute("tipoIngrediente", daoTipoIngrediente.get(id));
+
+                this.getTransaction().commit();
+                
                 getServletContext().getRequestDispatcher("/nutricionista/tiposIngrediente/edit.jsp").forward(request, response);
 
             } else if (action.equals("update")) {
-
-                /*this.validate(request);*/
+                this.validate();
 
                 TipoIngrediente tipoIngrediente = this.processRequestForm();
                 this.update(tipoIngrediente);
 
-                request.setAttribute("tiposIngrediente", this.all());
+                this.getTransaction().commit();
+                
                 this.getResponse().sendRedirect(getServletContext().getContextPath() + "/tiposIngrediente");
 
             } else if (action.equals("delete")) {
-
                 TipoIngrediente tipoIngrediente = new TipoIngrediente();
                 tipoIngrediente.setId(Integer.parseInt(request.getParameter("id")));
 
@@ -154,9 +157,8 @@ public class TiposIngredienteController extends HttpServlet {
             }
 
         } catch(Exception E) {
-            request.setAttribute("tipoIngrediente", this.processRequestForError());
             E.printStackTrace();
-            //request.setAttribute("usuario", Usuario.processRequestForError(request));
+            request.setAttribute("tipoIngrediente", this.processRequestForError());
 
             String action = request.getParameter("action");
 
@@ -229,7 +231,6 @@ public class TiposIngredienteController extends HttpServlet {
         }
 
         tipo.setNome(request.getParameter("nome"));
-        
 
         return tipo;
     }
@@ -243,7 +244,6 @@ public class TiposIngredienteController extends HttpServlet {
         }
 
         tipo.setNome(request.getParameter("nome"));
-        
 
         return tipo;
     }

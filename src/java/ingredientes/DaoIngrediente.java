@@ -1,19 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ingredientes;
 
 import java.util.List;
 import org.hibernate.Query;
-import utils.HibernateUtil;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
-/**
- *
- * @author Layla
- */
+
 public class DaoIngrediente {
      private Session session;
      
@@ -69,7 +59,7 @@ public class DaoIngrediente {
     public Object update(Ingrediente ingrediente) {
         Ingrediente ingredientePersistido = this.get(ingrediente.getId());
         ingredientePersistido = ingrediente;
-        this.session.update(ingredientePersistido);
+        this.session.merge(ingredientePersistido);
         
         return ingredientePersistido;
     }
