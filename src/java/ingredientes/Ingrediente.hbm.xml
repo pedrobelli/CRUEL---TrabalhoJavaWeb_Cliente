@@ -7,9 +7,9 @@
       <column name="id"/>
       <generator class="identity"/>
     </id>
-    <many-to-one class="tiposIngrediente.TipoIngrediente" fetch="select" name="tipoIngrediente">
+    <property name="tipoIngrediente" type="java.lang.Integer">
       <column name="tipo_ingrediente_id"/>
-    </many-to-one>
+    </property>
     <property name="nome" type="string">
       <column length="80" name="nome"/>
     </property>

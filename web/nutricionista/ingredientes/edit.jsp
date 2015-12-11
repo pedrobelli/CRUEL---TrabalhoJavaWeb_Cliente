@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="tiposIngrediente.TipoIngrediente"%>
 <%@page import="ingredientes.Ingrediente"%>
 <!DOCTYPE html>
 
@@ -6,6 +7,7 @@
 
 <% 
     Ingrediente ingrediente = (Ingrediente) request.getAttribute("ingrediente"); 
+    List<TipoIngrediente> tiposIngrediente = (List) request.getAttribute("tiposIngrediente"); 
 %>
 
 <main class="main">
@@ -25,19 +27,29 @@
                         <label for="nome">Nome:</label>
                         <input type="text" name="nome" value="${ingrediente.nome}">
                     </div>
-                        <div class="input-field">
-                            <select name="tipoIngrediente" class="browser-default" value="">
-                            <option value="" disabled selected>Tipo</option>
-                            <option value="1">Option 1</option>
-                            <option value="2">Option 2</option>
-                            <option value="3">Option 3</option>
-                            </select>
-                        </div>
+                    <div class="input-field">
+                        <select name="tipoIngrediente" class="browser-default" value="">
+                            <option value="" disabled selected>Tipo de Ingrediente</option>
+                            <%
+                                if(tiposIngrediente.size()>0){
+                                    int index;                                    
+                                    for(index=0; index < tiposIngrediente.size(); index++){ 
+                                        TipoIngrediente tipoIngrediente = tiposIngrediente.get(index);
+                                        if (tipoIngrediente.getId() == ingrediente.getTipoIngrediente()) {
+                                            out.println("<option value='" + tipoIngrediente.getId() + "' selected>" + tipoIngrediente.getNome() + "</option>");
+                                        } else {
+                                            out.println("<option value='" + tipoIngrediente.getId() + "'>" + tipoIngrediente.getNome() + "</option>");
+                                        }
+                                    }
+                                }
+                            %>
+                        </select>
+                    </div>
 
-                        <div class="input-field">
-                                <label for="descricao">Descricao</label>
-                                <textarea name="descricao" class="materialize-textarea" value="${ingrediente.descricao}"></textarea>
-                        </div>
+                    <div class="input-field">
+                            <label for="descricao">Descricao</label>
+                            <textarea name="descricao" class="materialize-textarea">${ingrediente.descricao}</textarea>
+                    </div>
 
                     <button class="btn blue right" type="submit" name="action">Ok
                         <i class="material-icons right">send</i>

@@ -27,7 +27,7 @@
                         <label for="nome">Nome:</label>
                         <input type="text" name="nome" value="${ingrediente.nome}">
                     </div>
-                         <div class="input-field">
+                    <div class="input-field">
                         <select name="tipoIngrediente" class="browser-default" value="">
                             <option value="" disabled selected>Tipo de Ingrediente</option>
                             <%
@@ -42,16 +42,14 @@
                                         }
                                     }
                                 }
-                                
-                                
                             %>
                         </select>
                     </div>
 
-                        <div class="input-field">
-                                <label for="descricao">Descricao</label>
-                                <textarea name="descricao" class="materialize-textarea" value="${ingrediente.descricao}"></textarea>
-                        </div>
+                    <div class="input-field">
+                            <label for="descricao">Descricao</label>
+                            <textarea name="descricao" class="materialize-textarea">${ingrediente.descricao}</textarea>
+                    </div>
 
                     <button class="btn blue right" type="submit" name="action">Ok
                         <i class="material-icons right">send</i>

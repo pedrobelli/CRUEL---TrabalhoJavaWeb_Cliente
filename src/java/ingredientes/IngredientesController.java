@@ -2,8 +2,6 @@ package ingredientes;
     
 import java.io.IOException;
 import java.io.PrintWriter;
-import static java.lang.Double.parseDouble;
-import static java.lang.Integer.parseInt;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +16,6 @@ import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import tiposIngrediente.DaoTipoIngrediente;
-import tiposIngrediente.TipoIngrediente;
 import utils.HibernateUtil;
     
 @WebServlet(name = "IngredientesController", urlPatterns = {"/ingredientes"})
@@ -81,7 +78,7 @@ public class IngredientesController extends HttpServlet {
             this.setSession(HibernateUtil.getSessionFactory().openSession());
             this.setTransaction(this.getSession().beginTransaction());
             
-            HttpSession httpSession = request.getSession(false); 
+            //HttpSession httpSession = request.getSession(false); 
             //Usuario usuarioSession = (Usuario) httpSession.getAttribute("usuarioSession");
 
             //if (usuarioSession == null) {
@@ -122,10 +119,10 @@ public class IngredientesController extends HttpServlet {
 
             } else if (action.equals("create")) {                    
                 this.validate();
-
+                
                 Ingrediente ingrediente = this.processRequestForm();
                 this.create(ingrediente);
-
+                
                 this.getTransaction().commit();
 
                 this.getResponse().sendRedirect(getServletContext().getContextPath() + "/ingredientes");
@@ -133,9 +130,12 @@ public class IngredientesController extends HttpServlet {
             } else if (action.equals("edit")) {
                 DaoIngrediente daoIngrediente = new DaoIngrediente().setDaoIngrediente(this.getSession());
                 int id = Integer.parseInt(request.getParameter("id"));
+                
+                DaoTipoIngrediente daoTipoIngrediente = new DaoTipoIngrediente().setDaoTipoIngrediente(this.getSession());
 
                 request.setAttribute("ingrediente", daoIngrediente.get(id));
-
+                request.setAttribute("tiposIngrediente", daoTipoIngrediente.all(this.getSession()));
+                
                 this.getTransaction().commit();
 
                 getServletContext().getRequestDispatcher("/nutricionista/ingredientes/edit.jsp").forward(request, response);
@@ -163,9 +163,12 @@ public class IngredientesController extends HttpServlet {
             }
 
         } catch(Exception E) {
+            E.printStackTrace();
+            DaoTipoIngrediente daoTipoIngrediente = new DaoTipoIngrediente().setDaoTipoIngrediente(this.getSession());
+            
             request.setAttribute("ingrediente", this.processRequestForError());
-            //request.setAttribute("usuario", Usuario.processRequestForError(request));
-
+            request.setAttribute("tiposIngrediente", daoTipoIngrediente.all(this.getSession()));
+            
             String action = request.getParameter("action");
 
             if (action != null && action.equals("create")) {
@@ -221,7 +224,7 @@ public class IngredientesController extends HttpServlet {
             errors.add("O campo nome deve ser preenchido;");
         }
 		
-	if (request.getParameter("tipoIngrediente").isEmpty()) {
+	if (request.getParameter("tipoIngrediente") == null || request.getParameter("tipoIngrediente").isEmpty()) {
             errors.add("O campo tipo de ingrediente deve ser preenchido;");
         }      
 
@@ -241,6 +244,10 @@ public class IngredientesController extends HttpServlet {
         }
 
         ingre.setNome(request.getParameter("nome"));
+        ingre.setTipoIngrediente(Integer.parseInt(request.getParameter("tipoIngrediente")));
+        ingre.setDescricao(request.getParameter("descricao"));
+        
+        
 
         return ingre;
     }
@@ -253,6 +260,12 @@ public class IngredientesController extends HttpServlet {
             ingre.setId(Integer.parseInt(request.getParameter("id")));
         }
         ingre.setNome(request.getParameter("nome"));
+        
+        if (request.getParameter("tipoIngrediente") != null && !request.getParameter("tipoIngrediente").isEmpty()) {
+            ingre.setTipoIngrediente(Integer.parseInt(request.getParameter("tipoIngrediente")));
+        }
+        
+        ingre.setDescricao(request.getParameter("descricao"));
 
         return ingre;
     }
