@@ -5,9 +5,8 @@
       <i class="large material-icons">menu</i>
     </a>
     <ul>
-      <li><a href="#" class="btn-floating blue lighten-2 ">INIC</a></li>
-      <li><a href="#" class="btn-floating blue lighten-2 ">LIST</a></li>      
-      <li><a href="#" class="btn-floating blue lighten-2 ">CATE</a></li>
-      <li><a href="#" class="btn-floating blue lighten-2 ">INGR</a></li>
+      <li><a href="<%=getServletContext().getContextPath()%>/cardapios" class="btn-floating blue lighten-2 ">CARD</a></li>
+      <li><a href="<%=getServletContext().getContextPath()%>/tiposIngrediente" class="btn-floating blue lighten-2 ">TPIN</a></li>      
+      <li><a href="<%=getServletContext().getContextPath()%>/ingredientes" class="btn-floating blue lighten-2 ">INGR</a></li>
     </ul>
 </div>

@@ -17,11 +17,10 @@
         <h3 class="center">Entrada</h3>
         <section>
             <div class="container">
-                <h4>Editar Entrada</h4>
+                <h4>Nova Entrada</h4>
                 <%@ include file="/errors.jsp"%>
-                <form class="cadast" action="<%=url%>entradas?action=update" method="post">
-                    <input type="hidden" name="id" value="${entrada.id}"> 
-                    
+                <form class="cadast" action="<%=url%>entradas?action=create" method="post">
+                                          
                     <div class="input-field">
                         <select class="browser-default" name="tipoCliente" value="">
                                 <option value="" disabled selected>Tipo de Cliente</option>

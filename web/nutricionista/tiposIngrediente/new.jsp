@@ -1,32 +1,38 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="tiposIngrediente.TipoIngrediente"%>
 <!DOCTYPE html>
+
 <%@ include file="/header.jsp"%>
 
-<main>
+<% 
+    TipoIngrediente tipoIngrediente = (TipoIngrediente) request.getAttribute("tipoIngrediente"); 
+%>
+
+<main class="main">
+
     <div class="container row">
 
-       <%@ include file="actionbutton.jsp"%>
+        <%@ include file="/nutricionista/actionbutton.jsp"%>
 
-     <h3 class="center">NUTRIÇÃO</h3>
-      <section>
-          <div class="container">
-          <h4>Novo Tipo de Ingrediente</h4>
-          
-          <form class="cadast" action="index.html" method="post">
-            <div class="input-field">
-                <label for="name">Nome:</label>
-                <input type="text" name="name">
+        <h3 class="center">Tipos de Ingrediente</h3>
+        <section>
+            <div class="container">
+                <h4>Novo Tipo</h4>
+                <%@ include file="/errors.jsp"%>
+                <form class="cadast" action="<%=url%>tiposIngrediente?action=create" method="post">
+                                          
+                    <div class="input-field">
+                        <label for="nome">Nome:</label>
+                        <input type="text" name="nome" value="${tipoIngrediente.nome}">
+                    </div>
+                                        
+                    <button class="btn blue right" type="submit" name="action">Ok
+                        <i class="material-icons right">send</i>
+                    </button>
+                    <a href="<%=url%>tiposIngrediente" class="waves-effect waves-teal btn-flat right">Cancelar</a>
+                </form>
             </div>
-            
-            <button class="btn blue right" type="submit" name="action">Ok
-                <i class="material-icons right">send</i>
-            </button>
-            <a class="waves-effect waves-teal btn-flat right">Cancelar</a>
-        </form>
-          
-        </div>
-      </section>
+        </section>
     </div>
   </main>
-
 <%@ include file="/footer.jsp"%>

@@ -81,7 +81,7 @@ public class TiposIngredienteController extends HttpServlet {
             this.setSession(HibernateUtil.getSessionFactory().openSession());
             this.setTransaction(this.getSession().beginTransaction());
             
-            HttpSession httpSession = request.getSession(false); 
+            //HttpSession httpSession = request.getSession(false); 
             //Usuario usuarioSession = (Usuario) httpSession.getAttribute("usuarioSession");
 
             //if (usuarioSession == null) {
@@ -93,7 +93,7 @@ public class TiposIngredienteController extends HttpServlet {
             if (action == null) {
 
                 request.setAttribute("tiposIngrediente", this.all()); 
-                getServletContext().getRequestDispatcher("/gerente/tiposIngrediente/index.jsp").forward(request, response);
+                getServletContext().getRequestDispatcher("/nutricionista/tiposIngrediente/index.jsp").forward(request, response);
 
             } else if (action.equals("search")) {
                 String searchQuery = request.getParameter("searchQuery");
@@ -104,12 +104,12 @@ public class TiposIngredienteController extends HttpServlet {
                     request.setAttribute("tiposIngrediente", this.all());
                 }
 
-                getServletContext().getRequestDispatcher("/gerente/tiposIngrediente/index.jsp").forward(request, response);
+                getServletContext().getRequestDispatcher("/nutricionista/tiposIngrediente/index.jsp").forward(request, response);
 
             } else if (action.equals("new")) {
 
                 request.setAttribute("tipoIngrediente", new TipoIngrediente());
-                getServletContext().getRequestDispatcher("/gerente/tiposIngrediente/new.jsp").forward(request, response);
+                getServletContext().getRequestDispatcher("/nutricionista/tiposIngrediente/new.jsp").forward(request, response);
 
             } else if (action.equals("create")) {                    
                 this.validate();
@@ -122,13 +122,13 @@ public class TiposIngredienteController extends HttpServlet {
                 this.getTransaction().commit();
 
                 this.getResponse().sendRedirect(getServletContext().getContextPath() + "/tiposIngrediente");
-
+                
             } else if (action.equals("edit")) {
                 DaoTipoIngrediente daoTipoIngrediente = new DaoTipoIngrediente().setDaoTipoIngrediente(this.getSession());
                 int id = Integer.parseInt(request.getParameter("id"));
 
                 request.setAttribute("tipoIngrediente", daoTipoIngrediente.get(id));
-                getServletContext().getRequestDispatcher("/gerente/tiposIngrediente/edit.jsp").forward(request, response);
+                getServletContext().getRequestDispatcher("/nutricionista/tiposIngrediente/edit.jsp").forward(request, response);
 
             } else if (action.equals("update")) {
 
@@ -155,16 +155,17 @@ public class TiposIngredienteController extends HttpServlet {
 
         } catch(Exception E) {
             request.setAttribute("tipoIngrediente", this.processRequestForError());
+            E.printStackTrace();
             //request.setAttribute("usuario", Usuario.processRequestForError(request));
 
             String action = request.getParameter("action");
 
             if (action != null && action.equals("create")) {
                 this.getTransaction().rollback();
-                getServletContext().getRequestDispatcher("/gerente/tiposIngrediente/new.jsp").forward(request, response);
+                getServletContext().getRequestDispatcher("/nutricionista/tiposIngrediente/new.jsp").forward(request, response);
             } else if (action != null && action.equals("update")) {
                 this.getTransaction().rollback();
-                getServletContext().getRequestDispatcher("/gerente/tiposIngrediente/edit.jsp").forward(request, response);
+                getServletContext().getRequestDispatcher("/nutricionista/tiposIngrediente/edit.jsp").forward(request, response);
             }
         }finally {
             out.close();

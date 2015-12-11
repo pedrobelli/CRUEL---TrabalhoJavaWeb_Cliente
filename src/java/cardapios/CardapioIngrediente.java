@@ -8,6 +8,13 @@ public class CardapioIngrediente  implements java.io.Serializable {
      private Integer cardapioId;
      private Integer ingredienteId;
 
+    public CardapioIngrediente(Integer id, Integer tipoRefeicao, Integer cardapioId, Integer ingredienteId) {
+        this.id = id;
+        this.tipoRefeicao = tipoRefeicao;
+        this.cardapioId = cardapioId;
+        this.ingredienteId = ingredienteId;
+    }
+
     public Integer getId() {
         return id;
     }

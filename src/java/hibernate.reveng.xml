@@ -3,8 +3,8 @@
 <hibernate-reverse-engineering>
   <schema-selection match-catalog="cruel_cliente"/>
   <table-filter match-name="cardapio_ingredientes"/>
-  <table-filter match-name="entradas"/>
   <table-filter match-name="ingredientes"/>
-  <table-filter match-name="cardapios"/>
+  <table-filter match-name="entradas"/>
   <table-filter match-name="tipos_ingrediente"/>
+  <table-filter match-name="cardapios"/>
 </hibernate-reverse-engineering>

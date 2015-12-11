@@ -16,7 +16,18 @@ public class Entrada implements Serializable {
     private int id;
     private Date data;
     private int tipoCliente;
-    private double tipoRefeicao;
+    private double valorRefeicao;
+
+    public Entrada(int id, Date data, int tipoCliente, double tipoRefeicao) {
+        this.id = id;
+        this.data = data;
+        this.tipoCliente = tipoCliente;
+        this.valorRefeicao = tipoRefeicao;
+    }
+
+    public Entrada() {
+    }
+    
 
     public int getId() {
         return id;
@@ -42,13 +53,14 @@ public class Entrada implements Serializable {
         this.tipoCliente = tipoCliente;
     }
 
-    public double getTipoRefeicao() {
-        return tipoRefeicao;
+    public double getValorRefeicao() {
+        return valorRefeicao;
     }
 
-    public void setTipoRefeicao(double tipoRefeicao) {
-        this.tipoRefeicao = tipoRefeicao;
+    public void setValorRefeicao(double tipoRefeicao) {
+        this.valorRefeicao = tipoRefeicao;
     }
+    
     
     
 }

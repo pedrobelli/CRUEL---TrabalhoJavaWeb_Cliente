@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 10/12/2015 15:56:21 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class catalog="cruel_cliente" name="ingredientes.Ingrediente" optimistic-lock="version" table="ingredientes">
+    <id name="id" type="java.lang.Integer">
+      <column name="id"/>
+      <generator class="identity"/>
+    </id>
+    <many-to-one class="tiposIngrediente.TipoIngrediente" fetch="select" name="tipoIngrediente">
+      <column name="tipo_ingrediente_id"/>
+    </many-to-one>
+    <property name="nome" type="string">
+      <column length="80" name="nome"/>
+    </property>
+    <property name="descricao" type="string">
+      <column length="140" name="descricao"/>
+    </property>
+  </class>
+</hibernate-mapping>

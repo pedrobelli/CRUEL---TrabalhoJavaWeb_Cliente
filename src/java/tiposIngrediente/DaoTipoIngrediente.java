@@ -47,8 +47,8 @@ public class DaoTipoIngrediente {
         return tipoIngrediente;
     }   
     
-    public boolean checkExistance(String cpf) {
-        Query query = this.session.createSQLQuery("SELECT * FROM tipos_ingrediente WHERE nome = :nome").addEntity(TipoIngrediente.class).setParameter("cpf", cpf);
+    public boolean checkExistance(String nome) {
+        Query query = this.session.createSQLQuery("SELECT * FROM tipos_ingrediente WHERE nome = :nome").addEntity(TipoIngrediente.class).setParameter("nome", nome);
         List tiposIngrediente = query.list();
         
         return tiposIngrediente.size() > 0;

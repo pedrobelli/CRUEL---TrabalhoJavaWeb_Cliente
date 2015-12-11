@@ -15,7 +15,14 @@ import java.util.Date;
 public class Cardapio implements Serializable {
     private int id;
     private Date data;
-    
+
+    public Cardapio(int id, Date data) {
+        this.id = id;
+        this.data = data;
+    }
+
+    Cardapio() {
+    }  
 
     public int getId() {
         return id;

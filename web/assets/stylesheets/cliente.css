@@ -12801,7 +12801,7 @@ main .login-form {
 }
 /* line 13, ../sass/cliente.scss */
 .main .main-list .main-item {
-  min-height: 30px;
+  min-height: 40px;
   margin: 20px 3px;
   border-bottom: 1px solid gray;
 }
@@ -12814,79 +12814,98 @@ main .login-form {
   display: inline-block;
   width: 70%;
 }
-/* line 35, ../sass/cliente.scss */
+/* line 33, ../sass/cliente.scss */
 .main .main-searh #main-search:focus {
   background-color: transparent;
   border-bottom: 1px solid #9e9e9e;
 }
-/* line 38, ../sass/cliente.scss */
+/* line 36, ../sass/cliente.scss */
 .main .main-searh #main-search:focus + label i {
   font-size: 14px;
 }
-/* line 44, ../sass/cliente.scss */
+/* line 42, ../sass/cliente.scss */
 .main .main-searh label i {
   display: inline-block;
   vertical-align: middle;
 }
-/* line 48, ../sass/cliente.scss */
+/* line 46, ../sass/cliente.scss */
 .main .main-searh label span {
   display: inline-block;
   vertical-align: middle;
 }
-
+/* line 52, ../sass/cliente.scss */
+.main .btn.btn-main-search, .main .btn-main-search.btn-large {
+  display: inline-block;
+  width: 100px;
+  padding: 2px;
+}
 /* line 58, ../sass/cliente.scss */
-.entry-list {
+.main .btn.btn-delete, .main .btn-delete.btn-large {
+  padding: 0 5px;
+}
+/* line 62, ../sass/cliente.scss */
+.main .btn.btn-edit, .main .btn-edit.btn-large {
+  padding: 0 5px;
+}
+/* line 66, ../sass/cliente.scss */
+.main .list-form {
+  display: inline-block;
+  margin: 2px 5px;
+}
+
+/* line 74, ../sass/cliente.scss */
+.main-list {
   overflow: auto;
 }
-/* line 60, ../sass/cliente.scss */
-.entry-list .entry-item {
-  min-height: 30px;
+/* line 76, ../sass/cliente.scss */
+.main-list .main-item {
+  min-height: 40px;
   margin: 20px 3px;
   border-bottom: 1px solid gray;
 }
 
-/* line 67, ../sass/cliente.scss */
+/* line 83, ../sass/cliente.scss */
 form {
   margin: 50px 0;
 }
 
-/* line 73, ../sass/cliente.scss */
+/* line 89, ../sass/cliente.scss */
 .search-entry #search-entryi:focus {
   background-color: transparent;
   border-bottom: 1px solid #9e9e9e;
 }
-/* line 76, ../sass/cliente.scss */
+/* line 92, ../sass/cliente.scss */
 .search-entry #search-entryi:focus + label i {
   font-size: 14px;
 }
-/* line 82, ../sass/cliente.scss */
+/* line 98, ../sass/cliente.scss */
 .search-entry label i {
   display: inline-block;
   vertical-align: middle;
 }
-/* line 86, ../sass/cliente.scss */
+/* line 102, ../sass/cliente.scss */
 .search-entry label span {
   display: inline-block;
   vertical-align: middle;
 }
 
-/* line 95, ../sass/cliente.scss */
+/* line 111, ../sass/cliente.scss */
 .card-list {
   overflow: auto;
 }
-/* line 97, ../sass/cliente.scss */
+/* line 113, ../sass/cliente.scss */
 .card-list .card-item {
-  min-height: 30px;
+  min-height: 40px;
   margin: 20px 3px;
   border-bottom: 1px solid gray;
 }
 
-/* line 104, ../sass/cliente.scss */
+/* line 120, ../sass/cliente.scss */
 form {
   margin: 50px 0;
 }
 
-/* line 107, ../sass/cliente.scss */
+/* line 123, ../sass/cliente.scss */
 .group {
   margin: 20px 0;
 }

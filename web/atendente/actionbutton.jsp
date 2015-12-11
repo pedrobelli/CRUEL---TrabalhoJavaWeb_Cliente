@@ -5,8 +5,6 @@
       <i class="large material-icons">menu</i>
     </a>
     <ul>
-      <li><a href="#" class="btn-floating blue lighten-2 ">INIC</a></li>
-      <li><a href="#" class="btn-floating blue lighten-2 ">LIST</a></li>
-      
+      <li><a href="<%=getServletContext().getContextPath()%>/entradas" class="btn-floating blue lighten-2 ">LIST</a></li>
     </ul>
 </div>

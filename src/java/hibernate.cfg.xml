@@ -7,10 +7,10 @@
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/cruel_cliente</property>
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password">102030</property>
-    <mapping resource="hibernateMap/Cardapio.hbm.xml"/>
-    <mapping resource="hibernateMap/CardapioIngrediente.hbm.xml"/>
-    <mapping resource="hibernateMap/TipoIngrediente.hbm.xml"/>
-    <mapping resource="hibernateMap/Entrada.hbm.xml"/>
-    <mapping resource="hibernateMap/Ingrediente.hbm.xml"/>
+    <mapping resource="cardapios/Cardapio.hbm.xml"/>
+    <mapping resource="cardapios/CardapioIngrediente.hbm.xml"/>
+    <mapping resource="tiposIngrediente/TipoIngrediente.hbm.xml"/>
+    <mapping resource="entradas/Entrada.hbm.xml"/>
+    <mapping resource="ingredientes/Ingrediente.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>
