@@ -8,6 +8,21 @@
 
      <h3 class="center">NUTRIÇÃO</h3>
     <section>
+        <form class="cadast" action="<%=url%>cardapios?action=search" method="post">
+            <div class="input-field main-search" >
+                <select name="mes" class="browser-default">
+                    <option value="" disabled selected>Mes</option>
+                    <option value="1">Option 1</option>
+                    <option value="2">Option 2</option>
+                    <option value="3">Option 3</option>
+                  </select>
+                <input id="search-cardapio" type="search" name="searchQuery">
+                <label for="search-cardapio"><span>Buscar Cardapio</span></label>
+                <button class="btn btn-main-search blue right" type="submit" name="action">Buscar
+                    <i class="material-icons right">search</i>
+                </button>
+            </div>
+            </form>
         <div class="container">
              <form class="cadast" action="index.html" method="post">
               <div class="input-field" >
