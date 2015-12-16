@@ -1,8 +1,14 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="cardapios.Cardapio"%>
+<%@page import="utils.MesEnum.Mes"%>
 <%@page import="java.util.List"%>
 <!DOCTYPE html>
 <%@ include file="/header.jsp"%>
+
+<% 
+    int mes = (Integer) request.getAttribute("mes"); 
+    int ano = (Integer) request.getAttribute("ano");
+%>
 
 <main class="main">
     <div class="container row">
@@ -13,9 +19,29 @@
     <section>
         <div class="container">
             <form class="cadast" action="<%=url%>cardapios?action=search" method="post">
+                <label>Buscar Cardapio</label>
                 <div class="input-field main-search" >
-                    <input id="search-cardapio" type="search" name="searchQuery">
-                    <label for="search-cardapio"><span>Buscar Cardapio</span></label>
+                    
+                    <div class="input-field">
+                        <select name="mes" class="browser-default" value="">
+                            <%
+                                for(Mes mesEnum : Mes.values()){ 
+                                    if (mesEnum.getCod() == mes) {
+                                        out.println("<option value='" + mesEnum.getCod() + "' selected>" + mesEnum.getNome() + "</option>");
+                                    } else {
+                                        out.println("<option value='" + mesEnum.getCod() + "'>" + mesEnum.getNome() + "</option>");
+                                    }
+
+                                }
+                            %>
+                        </select>
+                    </div>
+                        
+                    <div class="input-field">
+                        <label for="ano">Ano:</label>
+                        <input type="text" name="ano" value="${ano}">   
+                    </div>
+                    
                     <button class="btn btn-main-search blue right" type="submit" name="action">Buscar
                         <i class="material-icons right">search</i>
                     </button>
