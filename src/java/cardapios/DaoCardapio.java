@@ -1,19 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cardapios;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import org.hibernate.Query;
-import utils.HibernateUtil;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
-/**
- *
- * @author Layla
- */
+
 public class DaoCardapio {
      private Session session;
      
@@ -47,15 +40,21 @@ public class DaoCardapio {
         return cardapio;
     }   
     
-    public boolean checkExistance(String cpf) {
-        Query query = this.session.createSQLQuery("SELECT * FROM cardapios WHERE nome = :nome").addEntity(Cardapio.class).setParameter("cpf", cpf);
+    public boolean checkExistance() {
+        Date hoje = Calendar.getInstance().getTime();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String hojeString = simpleDateFormat.format(hoje);
+        Query query = this.session.createSQLQuery("SELECT * FROM cardapios WHERE data = :hoje").addEntity(Cardapio.class);
+        query.setParameter("hoje", hojeString);
         List cardapios = query.list();
         
         return cardapios.size() > 0;
     }   
     
-    public List search(String searchQuery) {
-        Query query = this.session.createSQLQuery("SELECT * FROM cardapios WHERE nome LIKE '%"+searchQuery+"%'").addEntity(Cardapio.class);        
+    public List search(int mes, int ano) {
+        Query query = this.session.createSQLQuery("SELECT * FROM cardapios WHERE MONTH(data) = :mes AND YEAR(data) = :ano").addEntity(Cardapio.class);        
+        query.setParameter("mes", mes);
+        query.setParameter("ano", ano);
         List cardapios = query.list();
         
         return  cardapios;

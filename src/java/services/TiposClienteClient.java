@@ -25,7 +25,7 @@ import javax.ws.rs.client.WebTarget;
 public class TiposClienteClient {
     private WebTarget webTarget;
     private Client client;
-    private static final String BASE_URI = "http://localhost:8080/CRUEL_-_TrabalhoJavaWeb_Gerente/services";
+    private static final String BASE_URI = "http://localhost:3030/CRUEL_-_TrabalhoJavaWeb_Gerente/services";
 
     public TiposClienteClient() {
         client = javax.ws.rs.client.ClientBuilder.newClient();

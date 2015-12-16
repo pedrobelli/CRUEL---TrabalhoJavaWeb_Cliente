@@ -7,7 +7,7 @@
 <main class="main">
     <div class="container row">
 
-        <%@ include file="/nutricionista/actionbutton.jsp"%>
+    <%@ include file="/nutricionista/actionbutton.jsp"%>
 
     <h3 class="center">Cardapio</h3>
     <section>
@@ -21,19 +21,27 @@
                     </button>
                 </div>
             </form>
+                <%      
+                    boolean existeCardapioHoje = (Boolean) request.getAttribute("existeCardapioHoje");
+                    if(!existeCardapioHoje){             
+                        String htmlBody = "<span style='color:red;'>Não existe cardapío cadastrado para o dia de hoje!</span>";
+
+                        out.println(htmlBody);
+                    }
+                %>
             <ul class="main-list">
-                <%        
+                <%      
                     List<Cardapio> cardapios = (List) request.getAttribute("cardapios");
                     if(cardapios.size()>0){
                         int index;
                         for(index=0; index < cardapios.size(); index++){                   
                             Cardapio cardapio = cardapios.get(index);
                             String htmlBody ="<li class='main-item'>";
-                            htmlBody+="<span>" + cardapio.getTipoCliente() + cardapio.getData() + "</span>";
+                            htmlBody+="<span>" + cardapio.getDataFormatada() + "</span>";
                             
-                            htmlBody+="<form class='list-form right' action='" + url + "cardapios?action=delete' method='post'>";
+                            htmlBody+="<form class='list-form right' action='" + url + "cardapios?action=show' method='post'>";
                             htmlBody+="<input type='hidden' name='id' value='" + cardapio.getId() + "'>";
-                            htmlBody+="<button class='btn btn-delete  blue' type='submit'> <i class='material-icons'>delete</i></button></form>";
+                            htmlBody+="<button class='btn btn-edit  blue' type='submit'> VER </button></form>";
                             htmlBody+="</form>";
                             
                             htmlBody+="<form class='list-form right' action='" + url + "cardapios?action=edit' method='post'>";
@@ -43,9 +51,8 @@
 
                             out.println(htmlBody);
                         }
-                    }
-                    else{
-                        out.println("Nao existem Tipos de Cardapio cadastrados.");
+                    } else{
+                        out.println("Nenhum cardápio foi encontrado.<br>");
                     }
                 %>
             </ul>

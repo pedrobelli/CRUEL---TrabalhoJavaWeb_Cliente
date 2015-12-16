@@ -1,19 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cardapios;
 
-
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
-/**
- *
- * @author Layla
- */
+
 public class Cardapio implements Serializable {
-    private int id;
+    private int  id;
     private Date data;
 
     public Cardapio(int id, Date data) {
@@ -34,6 +26,14 @@ public class Cardapio implements Serializable {
 
     public Date getData() {
         return data;
+    }
+
+    public String getDataFormatada() {
+        Date data = this.data;
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String dataString = simpleDateFormat.format(data);
+        
+        return dataString;
     }
 
     public void setData(Date data) {

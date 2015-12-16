@@ -43,9 +43,8 @@
 
                             out.println(htmlBody);
                         }
-                    }
-                    else{
-                        out.println("Nao existem Tipos de Ingrediente cadastrados.");
+                    } else{
+                        out.println("Nenhum Tipo de Ingrediente foi encontrado.<br>");
                     }
                 %>
             </ul>
