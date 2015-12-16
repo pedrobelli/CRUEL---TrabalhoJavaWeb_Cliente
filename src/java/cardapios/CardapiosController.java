@@ -109,6 +109,31 @@ public class CardapiosController extends HttpServlet {
 
                 this.getResponse().sendRedirect(getServletContext().getContextPath() + "/cardapios");
 
+            } else if (action.equals("edit")) {
+                DaoCardapio daocardapio = new DaoCardapio().setDaoCardapio(this.getSession());
+                int id = Integer.parseInt(request.getParameter("id"));
+                
+                Cardapio cardapio = daocardapio.get(id);
+                CardapioDecorator cardapioDecorator = new CardapioDecorator();
+                
+                cardapioDecorator.setId(cardapio.getId());
+                cardapioDecorator.setData(cardapio.getDataFormatadaISO());
+                
+                request.setAttribute("cardapio", cardapioDecorator);
+                this.getTransaction().commit();
+                
+                getServletContext().getRequestDispatcher("/nutricionista/cardapios/edit.jsp").forward(request, response);
+
+            } else if (action.equals("update")) {
+                this.validate();
+                
+                Cardapio cardapio = this.processRequestForm();
+                this.update(cardapio);                
+                
+                this.getTransaction().commit();
+
+                this.getResponse().sendRedirect(getServletContext().getContextPath() + "/cardapios");
+
             }
             
         } catch(Exception E) {
@@ -148,6 +173,11 @@ public class CardapiosController extends HttpServlet {
     public void create(Cardapio cardapio) throws SQLException {
         DaoCardapio daoCardapio = new DaoCardapio().setDaoCardapio(this.getSession());
         daoCardapio.create(cardapio);
+    }
+    
+    public void update(Cardapio cardapio) throws SQLException {
+        DaoCardapio daoCardapio = new DaoCardapio().setDaoCardapio(this.getSession());
+        daoCardapio.update(cardapio);
     }
     
     private List<String> validate() throws Exception {

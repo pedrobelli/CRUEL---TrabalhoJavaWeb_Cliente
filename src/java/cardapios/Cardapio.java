@@ -36,6 +36,14 @@ public class Cardapio implements Serializable {
         return dataString;
     }
 
+    public String getDataFormatadaISO() {
+        Date data = this.data;
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String dataString = simpleDateFormat.format(data);
+        
+        return dataString;
+    }
+
     public void setData(Date data) {
         this.data = data;
     }

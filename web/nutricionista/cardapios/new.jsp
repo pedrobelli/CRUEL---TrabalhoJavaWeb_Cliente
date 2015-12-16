@@ -25,10 +25,10 @@
                     <input type="date" name="data" class="datepicker" value="${cardapio.data}">
                 </div>
 
-              <button class="btn blue right" type="submit" name="action">Ok
-               <i class="material-icons right">send</i>
-             </button>
-                <a href="<%=url%>cardapios" class="waves-effect waves-teal btn-flat right">Cancelar</a>
+            <button class="btn blue right" type="submit" name="action">Ok
+                <i class="material-icons right">send</i>
+            </button>
+            <a href="<%=url%>cardapios" class="waves-effect waves-teal btn-flat right">Cancelar</a>
           </form>
         </div>
       </section>

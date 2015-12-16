@@ -47,8 +47,8 @@
                     </div>
 
                     <div class="input-field">
-                            <label for="descricao">Descricao</label>
-                            <textarea name="descricao" class="materialize-textarea">${ingrediente.descricao}</textarea>
+                        <label for="descricao">Descricao</label>
+                        <textarea name="descricao" class="materialize-textarea">${ingrediente.descricao}</textarea>
                     </div>
 
                     <button class="btn blue right" type="submit" name="action">Ok
