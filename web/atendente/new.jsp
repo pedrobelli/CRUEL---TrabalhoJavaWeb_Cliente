@@ -8,7 +8,6 @@
 
 <% 
     Entrada entrada = (Entrada) request.getAttribute("entrada"); 
-    ArrayList tipoCliente = (ArrayList) request.getAttribute("tiposCliente");
 %>
 
 <main class="main">
