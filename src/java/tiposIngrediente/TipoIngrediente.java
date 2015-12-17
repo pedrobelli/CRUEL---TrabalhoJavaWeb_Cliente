@@ -3,6 +3,7 @@ package tiposIngrediente;
 public class TipoIngrediente  implements java.io.Serializable {
     private Integer id;
     private String nome;
+    private int    agrupadorTipoIngrediente;
 
     public TipoIngrediente(Integer id, String nome) {
         this.id = id;
@@ -26,5 +27,13 @@ public class TipoIngrediente  implements java.io.Serializable {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public int getAgrupadorTipoIngrediente() {
+        return agrupadorTipoIngrediente;
+    }
+
+    public void setAgrupadorTipoIngrediente(int agrupadorTipoIngrediente) {
+        this.agrupadorTipoIngrediente = agrupadorTipoIngrediente;
     }
 }

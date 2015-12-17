@@ -161,6 +161,16 @@ public class CardapiosController extends HttpServlet {
 
                 this.getResponse().sendRedirect(getServletContext().getContextPath() + "/cardapios");
 
+            } else if (action.equals("show")) {
+                DaoCardapio daocardapio = new DaoCardapio().setDaoCardapio(this.getSession());
+                int id = Integer.parseInt(request.getParameter("id"));
+                
+                request.setAttribute("cardapio", daocardapio.get(id));
+                
+                this.getTransaction().commit();
+
+                getServletContext().getRequestDispatcher("/nutricionista/cardapios/show.jsp").forward(request, response);
+
             }
             
         } catch(Exception E) {

@@ -1,57 +1,60 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="cardapios.Cardapio"%>
 <!DOCTYPE html>
+
 <%@ include file="/header.jsp"%>
+
+<% 
+    Cardapio cardapio = (Cardapio) request.getAttribute("cardapio"); 
+%>
 <main>
     <div class="container row">
 
-       <%@ include file="actionbutton.jsp"%>
+    <%@ include file="/nutricionista/actionbutton.jsp"%>
 
-     <h3 class="center">NUTRIÇÃO</h3>
+    <h3 class="center">Cardapio</h3>
     <section>
-        <form class="cadast" action="<%=url%>cardapios?action=search" method="post">
-            <div class="input-field main-search" >
-                <select name="mes" class="browser-default">
-                    <option value="" disabled selected>Mes</option>
-                    <option value="1">Option 1</option>
-                    <option value="2">Option 2</option>
-                    <option value="3">Option 3</option>
-                  </select>
-                <input id="search-cardapio" type="search" name="searchQuery">
-                <label for="search-cardapio"><span>Buscar Cardapio</span></label>
-                <button class="btn btn-main-search blue right" type="submit" name="action">Buscar
-                    <i class="material-icons right">search</i>
-                </button>
-            </div>
-            </form>
+        
         <div class="container">
-             <form class="cadast" action="index.html" method="post">
-              <div class="input-field" >
-                  <label for="cardapio-data">Cardapio Data</label>
-                  <span id="cardapio-data">${cardapio-data}</span>
-              </div>
-              <div class="group">
-                <p>Almoço</p>
-                <ul class="ingredientes">
-                    <li>${ingrediente}</li>
-                </ul>
-                <button class="btn blue right" name="action">Editar
-                        <i class="material-icons right">edit</i>
-                </button>
-              </div>
+            <div class="input-field" >
+                <%      
+                    String htmlBody ="<h5>Cardapio do dia: " + cardapio.getDataFormatada() + "</h5>";
+                    out.println(htmlBody);
+                %>
+            </div>
+            <form class="cadast" action="index.html" method="post">
+                <input type="hidden" name="id" value="${cardapio.id}">
+                <input type="hidden" name="tipoRefeicao" value="1">
+                
+                <div class="group">
+                  <p>Almoço</p>
+                  <ul class="ingredientes">
+                      <li>${ingrediente}</li>
+                  </ul>
+                  <button class="btn blue right" name="action">Editar
+                          <i class="material-icons right">edit</i>
+                  </button>
+                </div>
               
-              <div class="group">
-                <p>Janta</p>
-                <ul class="ingredientes">
-                    <li>${ingrediente}</li>
-                </ul>
-                <button class="btn blue right" name="action">Editar
+            </form>
+            
+            <form class="cadast" action="index.html" method="post">
+                <input type="hidden" name="id" value="${cardapio.id}">
+                <input type="hidden" name="tipoRefeicao" value="2">
+                
+                <div class="group">
+                    <p>Janta</p>
+                    <ul class="ingredientes">
+                        <li>${ingrediente}</li>
+                    </ul>
+                    <button class="btn blue right" name="action">Editar
                         <i class="material-icons right">edit</i>
-                </button>
-              </div>     
+                    </button>
+                </div>     
 
-              
-             <a class="waves-effect waves-teal btn-flat right">Voltar</a>
-          </form>
+            </form>
+                  
+        <a href="<%=url%>cardapios" class="waves-effect waves-teal btn-flat right">Cancelar</a>
         </div>
       </section>
     </div>

@@ -214,6 +214,10 @@ public class TiposIngredienteController extends HttpServlet {
         if (request.getParameter("nome").isEmpty()) {
             errors.add("O campo nome deve ser preenchido;");
         }
+        
+        if (request.getParameter("agrupadorTipoIngrediente") == null && request.getParameter("agrupadorTipoIngrediente").isEmpty()) {
+            errors.add("O campo agrupadores de tipo de ingrediente deve ser preenchido;");
+        }
 
         if (!errors.isEmpty()) {
             errors.add("A operação não pôde ser concluída por causa dos seguintes erros:");
@@ -231,6 +235,7 @@ public class TiposIngredienteController extends HttpServlet {
         }
 
         tipo.setNome(request.getParameter("nome"));
+        tipo.setAgrupadorTipoIngrediente(Integer.parseInt(request.getParameter("agrupadorTipoIngrediente")));
 
         return tipo;
     }

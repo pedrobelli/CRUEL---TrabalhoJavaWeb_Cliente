@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="utils.AgrupadorTipoIngredienteEnum.AgrupadorTipoIngrediente"%>
 <%@page import="tiposIngrediente.TipoIngrediente"%>
 <!DOCTYPE html>
 
@@ -25,6 +26,22 @@
                     <div class="input-field">
                         <label for="nome">Nome:</label>
                         <input type="text" name="nome" value="${tipoIngrediente.nome}">
+                    </div>
+                     
+                    <div class="input-field">
+                        <select name="agrupadorTipoIngrediente" class="browser-default" value="">
+                            <option value="" disabled selected>Agrupadores de Tipo de Ingrediente</option>
+                            <%
+                                for(AgrupadorTipoIngrediente agrupadorTipoIngrediente : AgrupadorTipoIngrediente.values()){ 
+                                    if (agrupadorTipoIngrediente.getCod() == tipoIngrediente.getAgrupadorTipoIngrediente()) {
+                                        out.println("<option value='" + agrupadorTipoIngrediente.getCod() + "' selected>" + agrupadorTipoIngrediente.getNome() + "</option>");
+                                    } else {
+                                        out.println("<option value='" + agrupadorTipoIngrediente.getCod() + "'>" + agrupadorTipoIngrediente.getNome() + "</option>");
+                                    }
+
+                                }
+                            %>
+                        </select>
                     </div>
                                         
                     <button class="btn blue right" type="submit" name="action">Ok
