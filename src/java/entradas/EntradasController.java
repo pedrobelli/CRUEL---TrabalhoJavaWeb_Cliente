@@ -5,7 +5,9 @@ import java.io.PrintWriter;
 import static java.lang.Double.parseDouble;
 import static java.lang.Integer.parseInt;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import services.TipoCliente;
 import services.TiposClienteClient;
 import utils.HibernateUtil;
     
@@ -111,11 +114,12 @@ public class EntradasController extends HttpServlet {
 
             } else if (action.equals("new")) {
                 
-                TiposClienteClient tiposCliente = new TiposClienteClient().getJson(TiposClienteClient.class);
-                
+                List<TipoCliente> tiposCliente = new TiposClienteClient().listAll();                
+                String dataAtual = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss").format(new Date());
                 
                 request.setAttribute("tiposCliente", tiposCliente);                  
                 request.setAttribute("entrada", new Entrada());
+                request.setAttribute("dataAtual", dataAtual); 
                 
                 this.getTransaction().commit();
 
@@ -134,7 +138,11 @@ public class EntradasController extends HttpServlet {
             } else if (action.equals("edit")) {
                 DaoEntrada daoEntrada = new DaoEntrada().setDaoEntrada(this.getSession());
                 int id = Integer.parseInt(request.getParameter("id"));
-
+                
+                 List<TipoCliente> tiposCliente = new TiposClienteClient().listAll();                
+                
+                request.setAttribute("tiposCliente", tiposCliente);                  
+                
                 request.setAttribute("entrada", daoEntrada.get(id));
 
                 this.getTransaction().commit();
@@ -220,7 +228,7 @@ public class EntradasController extends HttpServlet {
         HttpServletRequest request = this.getRequest();
 
         		
-		if (request.getParameter("tipoCliente").isEmpty()) {
+        if (request.getParameter("tipoCliente").isEmpty()) {
             errors.add("O campo tipo de tipo Cliente deve ser preenchido;");
         }     
 

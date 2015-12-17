@@ -5,9 +5,11 @@
  */
 package services;
 
+import java.util.List;
 import javax.ws.rs.ClientErrorException;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.GenericType;
 
 /**
  * Jersey REST client generated for REST resource:TiposClienteResource
@@ -39,6 +41,15 @@ public class TiposClienteClient {
     public <T> T getJson(Class<T> responseType) throws ClientErrorException {
         WebTarget resource = webTarget;
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
+    }
+    
+    public List<TipoCliente> listAll() {
+        WebTarget resource = webTarget;
+        List<TipoCliente> lista = resource
+                .request(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+                .get(new GenericType<List<TipoCliente>>(){});
+        
+        return lista;
     }
 
     public void close() {

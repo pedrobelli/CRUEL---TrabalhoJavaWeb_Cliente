@@ -1,3 +1,4 @@
+<%@page import="services.TipoCliente"%>
 <%@page import="services.TiposClienteClient"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -8,6 +9,7 @@
 
 <% 
     Entrada entrada = (Entrada) request.getAttribute("entrada"); 
+    String dataAtual = (String) request.getAttribute("dataAtual");
 %>
 
 <main class="main">
@@ -24,17 +26,16 @@
                 <form class="cadast" action="<%=url%>entradas?action=create" method="post">
                                           
                     <div class="input-field">
-                        <select name="tipoIngrediente" class="browser-default" value="">
+                        <select name="tipoCliente" class="browser-default" value="">
                             <option value="" disabled selected>Tipo de Ingrediente</option>
                             <%
-                                List<TiposClienteClient> tiposCliente = (List) request.getAttribute("tiposCliente");
+                                List<TipoCliente> tiposCliente = (List) request.getAttribute("tiposCliente");
                                 out.println("<h1>"+tiposCliente+"</h1>");
                                 if(tiposCliente.size()>0){
                                     int index;                                    
-                                    for(index=0; index < tiposCliente.size(); index++){ 
-                                        TiposClienteClient tipoClente = tiposCliente.get(index);
-                                        
-                                        out.println("<option value='" + tipoCliente + "' selected>" + tipoCliente + "</option>");
+                                    for(TipoCliente t : tiposCliente){ 
+                                                                               
+                                        out.println("<option value='" + t.getId() + "' selected>" + t.getNome() + " | Valor: " + t.getValorRefeicaoWithTwoDecimals() + "</option>");
                                         
                                     }
                                 }
@@ -42,13 +43,9 @@
                                 
                             %>
                         </select>
-                     <div class="input-field">
-                            <label for="valorRefeicao">Valor:</label>
-                            <input type="text" name="valorRefeicao" value="${entrada.valorRefeicao}">
-                    </div>
 
                     <div class="input-field">
-                        <input type="date" name="data" value="${entrada.data}">
+                        <input type="text" name="data" value="<%=dataAtual%>" readonly>
                     </div>
 
                     

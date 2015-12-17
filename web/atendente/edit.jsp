@@ -1,3 +1,4 @@
+<%@page import="services.TipoCliente"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="entradas.Entrada"%>
 <!DOCTYPE html>
@@ -6,6 +7,7 @@
 
 <% 
     Entrada entrada = (Entrada) request.getAttribute("entrada"); 
+    String dataAtual = (String) request.getAttribute("dataAtual");
 %>
 
 <main class="main">
@@ -23,20 +25,24 @@
                     <input type="hidden" name="id" value="${entrada.id}"> 
                     
                     <div class="input-field">
-                        <select class="browser-default" name="tipoCliente" value="">
-                                <option value="" disabled selected>Tipo de Cliente</option>
-                                <option value="1">Funcionario</option>
-                                <option value="2">Aluno</option>
-                                <option value="3">Externo</option>
+                        <select name="tipoCliente" class="browser-default" value="">
+                            <option value="" disabled selected>Tipo de Ingrediente</option>
+                            <%
+                                List<TipoCliente> tiposCliente = (List) request.getAttribute("tiposCliente");
+                                out.println("<h1>"+tiposCliente+"</h1>");
+                                if(tiposCliente.size() > 0){
+                                    for(TipoCliente t : tiposCliente){ 
+                                        String selected = t.getId() == entrada.getTipoCliente() ? "selected" : "";
+                                        out.println("<option value='" + t.getId() + "' "+selected+">" + t.getNome() + " | Valor: " + t.getValorRefeicaoWithTwoDecimals() + "</option>");
+                                    }
+                                }                           
+                                
+                            %>
                         </select>
-                        </div>
-                     <div class="input-field">
-                            <label for="valorRefeicao">Valor:</label>
-                            <input type="text" name="valorRefeicao" value="${entrada.valorRefeicao}">
                     </div>
 
                     <div class="input-field">
-                        <input type="date" name="data" value="${entrada.data}">
+                        <input type="text" name="data" value="${entrada.data}">
                     </div>
 
                     

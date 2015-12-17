@@ -6,6 +6,7 @@
 package entradas;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -61,6 +62,9 @@ public class Entrada implements Serializable {
         this.valorRefeicao = tipoRefeicao;
     }
     
+    public String getDataFormatada(){
+        return new SimpleDateFormat("dd/MM/yyyy hh:mm:ss").format(getData());
+    }
     
     
 }

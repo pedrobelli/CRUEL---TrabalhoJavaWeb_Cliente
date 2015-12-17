@@ -32,7 +32,7 @@
                         for(index=0; index < entradas.size(); index++){                   
                             Entrada entrada = entradas.get(index);
                             String htmlBody ="<li class='main-item'>";
-                            htmlBody+="<span>" + entrada.getTipoCliente() + entrada.getData() + "</span>";
+                            htmlBody+="<span>" + entrada.getDataFormatada() + "</span>";
                             
                             htmlBody+="<form class='list-form right' action='" + url + "entradas?action=delete' method='post'>";
                             htmlBody+="<input type='hidden' name='id' value='" + entrada.getId() + "'>";
