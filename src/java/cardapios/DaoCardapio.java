@@ -68,7 +68,7 @@ public class DaoCardapio {
     public Object update(Cardapio cardapio) {
         Cardapio cardapioPersistido = this.get(cardapio.getId());
         cardapioPersistido = cardapio;
-        this.session.update(cardapioPersistido);
+        this.session.merge(cardapioPersistido);
         
         return cardapioPersistido;
     }

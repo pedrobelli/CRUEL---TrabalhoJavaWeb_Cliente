@@ -19,6 +19,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import utils.MesEnum.Mes;
 
 @WebServlet(name = "CardapiosController", urlPatterns = {"/cardapios"})
 public class CardapiosController extends HttpServlet {
@@ -86,7 +87,9 @@ public class CardapiosController extends HttpServlet {
                 int mes = calendario.get(calendario.MONTH)+1;
                 int ano = calendario.get(calendario.YEAR);
                 request.setAttribute("existeCardapioHoje", this.checkExistance()); 
-                request.setAttribute("cardapios", this.search(mes, ano)); 
+                request.setAttribute("cardapios", this.search(mes, ano));
+                request.setAttribute("mes", mes); 
+                request.setAttribute("ano", ano); 
 
                 this.getTransaction().commit();
                 
@@ -99,6 +102,30 @@ public class CardapiosController extends HttpServlet {
                 
                 getServletContext().getRequestDispatcher("/nutricionista/cardapios/new.jsp").forward(request, response);
 
+            } else if (action.equals("search")) {
+                request.setAttribute("existeCardapioHoje", this.checkExistance());
+                String mes = request.getParameter("mes");
+                String ano = request.getParameter("ano");
+
+                if ((!mes.equals("") && mes.length() < 4) && !ano.equals("")) {
+                    int mesInt = Integer.parseInt(mes);
+                    int anoInt = Integer.parseInt(ano);
+                    request.setAttribute("mes", mesInt); 
+                    request.setAttribute("ano", anoInt); 
+                    request.setAttribute("cardapios", this.search(mesInt, anoInt));
+                } else {
+                    Calendar calendario = Calendar.getInstance();
+                    int mesInt = calendario.get(calendario.MONTH)+1;
+                    int anoInt = calendario.get(calendario.YEAR);
+                    request.setAttribute("mes", mesInt); 
+                    request.setAttribute("ano", anoInt); 
+                    request.setAttribute("cardapios", this.search(mesInt, anoInt));
+                }
+
+                this.getTransaction().commit();
+
+                getServletContext().getRequestDispatcher("/nutricionista/cardapios/index.jsp").forward(request, response);
+
             } else if (action.equals("create")) {
                 this.validate();
 
@@ -108,6 +135,41 @@ public class CardapiosController extends HttpServlet {
                 this.getTransaction().commit();
 
                 this.getResponse().sendRedirect(getServletContext().getContextPath() + "/cardapios");
+
+            } else if (action.equals("edit")) {
+                DaoCardapio daocardapio = new DaoCardapio().setDaoCardapio(this.getSession());
+                int id = Integer.parseInt(request.getParameter("id"));
+                
+                Cardapio cardapio = daocardapio.get(id);
+                CardapioDecorator cardapioDecorator = new CardapioDecorator();
+                
+                cardapioDecorator.setId(cardapio.getId());
+                cardapioDecorator.setData(cardapio.getDataFormatadaISO());
+                
+                request.setAttribute("cardapio", cardapioDecorator);
+                this.getTransaction().commit();
+                
+                getServletContext().getRequestDispatcher("/nutricionista/cardapios/edit.jsp").forward(request, response);
+
+            } else if (action.equals("update")) {
+                this.validate();
+                
+                Cardapio cardapio = this.processRequestForm();
+                this.update(cardapio);                
+                
+                this.getTransaction().commit();
+
+                this.getResponse().sendRedirect(getServletContext().getContextPath() + "/cardapios");
+
+            } else if (action.equals("show")) {
+                DaoCardapio daocardapio = new DaoCardapio().setDaoCardapio(this.getSession());
+                int id = Integer.parseInt(request.getParameter("id"));
+                
+                request.setAttribute("cardapio", daocardapio.get(id));
+                
+                this.getTransaction().commit();
+
+                getServletContext().getRequestDispatcher("/nutricionista/cardapios/show.jsp").forward(request, response);
 
             }
             
@@ -148,6 +210,11 @@ public class CardapiosController extends HttpServlet {
     public void create(Cardapio cardapio) throws SQLException {
         DaoCardapio daoCardapio = new DaoCardapio().setDaoCardapio(this.getSession());
         daoCardapio.create(cardapio);
+    }
+    
+    public void update(Cardapio cardapio) throws SQLException {
+        DaoCardapio daoCardapio = new DaoCardapio().setDaoCardapio(this.getSession());
+        daoCardapio.update(cardapio);
     }
     
     private List<String> validate() throws Exception {
